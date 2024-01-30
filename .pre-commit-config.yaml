@@ -1,0 +1,26 @@
+repos:
+  - repo: local
+    hooks:
+      - id: ruff-format
+        language: python
+        name: ruff-format
+        pass_filenames: false
+        language_version: python3.12
+        entry: poetry run ruff format http_redirect_service tests
+
+  - repo: local
+    hooks:
+      - id: ruff
+        language: python
+        name: ruff
+        pass_filenames: false
+        language_version: python3.12
+        entry: poetry run ruff --fix --exit-non-zero-on-fix --show-fixes http_redirect_service tests
+
+  - repo: local
+    hooks:
+      - id: mypy
+        language: python
+        name: mypy
+        pass_filenames: false
+        entry: poetry run mypy http_redirect_service --show-error-codes

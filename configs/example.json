@@ -1,0 +1,10 @@
+{
+  "my-pool-1": {
+    "domain-a.xyz": 2,
+    "domain-b.xyz": 1
+  },
+  "another-pool-2": {
+    "domain-c.xyz": 5,
+    "domain-d.xyz": 10
+  }
+}

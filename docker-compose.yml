@@ -1,0 +1,34 @@
+version: "3"
+
+services:
+  server:
+    build: .
+    ports:
+      - "8080:80"
+    depends_on:
+      - redis
+    environment:
+      - ENV=dev
+      - REDIS_DSN=redis://redis:6379/0
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:80/_healthcheck" ]
+      interval: 1m
+      timeout: 5s
+      retries: 3
+    volumes:
+      - ./configs/:/app/configs/
+
+  redis:
+    image: redis:7.2-alpine
+    restart: always
+    ports:
+      - "6378:6379"
+    command: redis-server --loglevel warning
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    volumes:
+      - cache:/data
+
+volumes:
+  cache:
+    driver: local
